@@ -1,4 +1,8 @@
 WarmupRails::Application.routes.draw do
+  post '/users/add' => 'users#add'
+  post '/users/login' => 'users#login'
+  post '/TESTAPI/resetFixture' => 'testapis#resetFixture'
+  post '/TESTAPI/unitTests' => 'testapis#unitTests'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
