@@ -13,6 +13,9 @@ class UsersControllerTest < ActionController::TestCase
 
 		puts "\nCalling test_add_with_empty_username"
 
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
+
 		# Define the HTTP method to call with the right params
 		post(:add, {'user' => "", 'password' => "myPassword"})
 
@@ -32,6 +35,9 @@ class UsersControllerTest < ActionController::TestCase
 	def test_add_with_username_too_long
 
 		puts "\nCalling test_add_with_username_too_long"
+
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
 
 		# Define the HTTP method to call with the right params
 		post(:add, {'user' => 'a'*129, 'password' => "myPassword"})
@@ -53,6 +59,9 @@ class UsersControllerTest < ActionController::TestCase
 
 		puts "\nCalling test_add_with_password_too_long"
 
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
+
 		# Define the HTTP method to call with the right params
 		post(:add, {'user' => "Eric", 'password' => "a"*129})
 
@@ -73,6 +82,9 @@ class UsersControllerTest < ActionController::TestCase
 
 		puts "\nCalling test_add_with_existing_user"
 
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
+
 		# Define the HTTP method to call with the right params
 		post(:add, {'user' => "Johnny", 'password' => "HisPassword"})
 
@@ -92,6 +104,9 @@ class UsersControllerTest < ActionController::TestCase
 	def test_add_with_valid_user
 
 		puts "\nCalling test_add_with_valid_user"
+
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
 
 		# Define the HTTP method to call with the right params
 		post(:add, {'user' => "Michel", 'password' => "DasPassword"})
@@ -116,6 +131,9 @@ class UsersControllerTest < ActionController::TestCase
 
 		puts "\nCalling test_login_with_empty_username"
 
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
+
 		# Define the HTTP method to call with the right params
 		post(:login, {'user' => "", 'password' => "myPassword"})
 
@@ -135,6 +153,9 @@ class UsersControllerTest < ActionController::TestCase
 	def test_login_with_username_too_long
 
 		puts "\nCalling test_login_with_username_too_long"
+
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
 
 		# Define the HTTP method to call with the right params
 		post(:login, {'user' => 'a'*129, 'password' => "myPassword"})
@@ -156,6 +177,9 @@ class UsersControllerTest < ActionController::TestCase
 
 		puts "\nCalling test_login_with_password_too_long"
 
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
+
 		# Define the HTTP method to call with the right params
 		post(:login, {'user' => "Eric", 'password' => "a"*129})
 
@@ -175,6 +199,9 @@ class UsersControllerTest < ActionController::TestCase
 	def test_login_with_non_existing_user
 
 		puts "\nCalling test_login_with_non_existing_user"
+
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
 
 		# Define the HTTP method to call with the right params
 		post(:login, {'user' => "Eric", 'password' => "APassword"})
@@ -196,6 +223,9 @@ class UsersControllerTest < ActionController::TestCase
 
 		puts "\nCalling test_login_with_wrong_password"
 
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
+
 		# Define the HTTP method to call with the right params
 		post(:login, {'user' => "Johnny", 'password' => "WrongPassword"})
 
@@ -215,6 +245,9 @@ class UsersControllerTest < ActionController::TestCase
 	def test_login_with_valid_user
 
 		puts "\nCalling test_login_with_valid_user"
+
+		# Set the header to ensure we get back the json response
+		@request.headers["Accept"] = "application/json"
 
 		# Define the HTTP method to call with the right params
 		post(:login, {'user' => "Johnny", 'password' => "HisPassword"})
