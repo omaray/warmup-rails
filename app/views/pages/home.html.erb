@@ -1,0 +1,9 @@
+<% if flash[:notice]%>
+<p><%= flash[:notice] %></p>
+<% end %>
+<form name="input" action="/users/add" method="post">
+	Username: <input type="text" name="user"><br>
+	Password: <input type="password" name="password"><br>
+	<input type="submit" name="addUser" value="Add User" onclick="javascript: form.action='/users/add';"/>
+	<input type="submit" name="login" value="Login" onclick="javascript: form.action='/users/login';"/>
+</form>

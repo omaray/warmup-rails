@@ -1,6 +1,8 @@
 WarmupRails::Application.routes.draw do
+  root 'pages#home'
   post '/users/add' => 'users#add'
   post '/users/login' => 'users#login'
+  post '/users/logout' => 'users#logout'
   post '/TESTAPI/resetFixture' => 'testapis#resetFixture'
   post '/TESTAPI/unitTests' => 'testapis#unitTests'
   # The priority is based upon order of creation: first created -> highest priority.

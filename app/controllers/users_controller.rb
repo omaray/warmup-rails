@@ -14,20 +14,21 @@ class UsersController < ApplicationController
 		errorCode = validate()
 		if (errorCode != SUCCESS)
 			puts "Hit an error code when basic validating"
-			render(json: {errCode: errorCode})
-			return
+			return error_response(errorCode)
 		end
 
 		# Ensure the user doesn't already exist
 		if (User.find_by_username(params["user"]))
 			puts "Seems like the user already exists"
-			render(json: {errCode: ERR_USER_EXISTS})
-			return
+			return error_response(ERR_USER_EXISTS)
 		end
 
 		# Create the user in the database
-		User.create(username: params["user"], password: params["password"], count: 1)
-		render(json: {errCode: SUCCESS, count: 1})		
+		@user = User.create(username: params["user"], password: params["password"], count: 1)
+		respond_to do |format|
+			format.html { render "logged" }
+			format.json { render json: {errCode: SUCCESS, count: 1} }
+		end
 	end
 
 	#######################################################################
@@ -43,37 +44,48 @@ class UsersController < ApplicationController
 		errorCode = validate()
 		if (errorCode != SUCCESS)
 			puts "Hit an error when basic validating"
-			render(json: {errCode: ERR_BAD_CREDENTIALS})
-			return
+			return error_response(ERR_BAD_CREDENTIALS)		
 		end
 
 		# Ensure the user exists
-		user = User.find_by_username(params["user"])
-		if (user.nil?)
+		@user = User.find_by_username(params["user"])
+		if (@user.nil?)
 			puts "The user doesn't exist in the database"
-			render(json: {errCode: ERR_BAD_CREDENTIALS})
-			return
+			return error_response(ERR_BAD_CREDENTIALS)
 		end
 
 		# Ensure the passwords match
-		if (user.password != params["password"])
+		if (@user.password != params["password"])
 			puts "The passwords don't match"
-			render(json: {errCode: ERR_BAD_CREDENTIALS})
-			return
+			return error_response(ERR_BAD_CREDENTIALS)
 		end
 
 		# Update the login count
-		user.count = user.count + 1
-		user.save
+		@user.count = @user.count + 1
+		@user.save
 
-		render(json: {errCode: SUCCESS, count: user.count})
+		respond_to do |format|
+			format.html { render "logged" }
+			format.json { render json: {errCode: SUCCESS, count: @user.count} }
+		end
+	end
+
+	#######################################################################
+	# METHOD: logout
+	#
+	# DESCRIPTION:
+	# Logs out the user that is already logged in. At this point it simply
+	# redirects to the home page.
+	#######################################################################
+	def logout
+		redirect_to :controller => 'pages', :action => 'home'
 	end
 
 	#######################################################################
 	# HELPER: validate
 	#
 	# DESCRIPTION:
-	# Validates the entries present in the params variable (JSON data passed)
+	# Validates the entries present in the params variable (JSON data).
 	#######################################################################
 	def validate
 		if (params["user"].empty?)
@@ -89,5 +101,21 @@ class UsersController < ApplicationController
 		end
 
 		return SUCCESS
+	end
+
+	#######################################################################
+	# HELPER: error_response
+	#
+	# DESCRIPTION:
+	# Sets the flash notice string and renders the right message in the
+	# home page or simply returns the right JSON error code.
+	#######################################################################
+	def error_response(errorCode)
+		flash[:notice] = ERROR_TO_STRING[errorCode]
+
+		respond_to do |format|
+			format.html { redirect_to :controller => 'pages', :action => 'home' }
+			format.json { render json: {errCode: errorCode} }
+		end
 	end
 end
