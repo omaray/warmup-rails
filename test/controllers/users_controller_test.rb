@@ -24,6 +24,12 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{ERR_BAD_USERNAME}}", response.body)
+
+		# Print the flash for visual validation
+		puts flash[:notice]
+
+		# Assert the flash was populated with the right message
+		assert_equal(flash[:notice], ERROR_TO_STRING[ERR_BAD_USERNAME])
 	end
 
 	#######################################################################
@@ -47,6 +53,12 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{ERR_BAD_USERNAME}}", response.body)
+
+		# Print the flash for visual validation
+		puts flash[:notice]
+
+		# Assert the flash was populated with the right message
+		assert_equal(flash[:notice], ERROR_TO_STRING[ERR_BAD_USERNAME])
 	end
 
 	#######################################################################
@@ -70,6 +82,12 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{ERR_BAD_PASSWORD}}", response.body)
+
+		# Print the flash for visual validation
+		puts flash[:notice]
+
+		# Assert the flash was populated with the right message
+		assert_equal(flash[:notice], ERROR_TO_STRING[ERR_BAD_PASSWORD])
 	end
 
 	#######################################################################
@@ -93,6 +111,12 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{ERR_USER_EXISTS}}", response.body)
+
+		# Print the flash for visual validation
+		puts flash[:notice]
+
+		# Assert the flash was populated with the right message
+		assert_equal(flash[:notice], ERROR_TO_STRING[ERR_USER_EXISTS])
 	end
 
 	#######################################################################
@@ -119,6 +143,9 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert that a new user was added in the database
 		assert_not_nil(User.find_by(username: "Michel"))
+
+		# Assert that the instance variable exists for the view to use
+		assert_not_nil(assigns["user"])
 	end
 
 	#######################################################################
@@ -142,6 +169,12 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{ERR_BAD_CREDENTIALS}}", response.body)
+
+		# Print the flash for visual validation
+		puts flash[:notice]
+
+		# Assert the flash was populated with the right message
+		assert_equal(flash[:notice], ERROR_TO_STRING[ERR_BAD_CREDENTIALS])
 	end
 
 	#######################################################################
@@ -165,6 +198,12 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{ERR_BAD_CREDENTIALS}}", response.body)
+
+		# Print the flash for visual validation
+		puts flash[:notice]
+
+		# Assert the flash was populated with the right message
+		assert_equal(flash[:notice], ERROR_TO_STRING[ERR_BAD_CREDENTIALS])
 	end
 
 	#######################################################################
@@ -188,6 +227,12 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{ERR_BAD_CREDENTIALS}}", response.body)
+
+		# Print the flash for visual validation
+		puts flash[:notice]
+
+		# Assert the flash was populated with the right message
+		assert_equal(flash[:notice], ERROR_TO_STRING[ERR_BAD_CREDENTIALS])
 	end
 
 	#######################################################################
@@ -211,6 +256,12 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{ERR_BAD_CREDENTIALS}}", response.body)
+
+		# Print the flash for visual validation
+		puts flash[:notice]
+
+		# Assert the flash was populated with the right message
+		assert_equal(flash[:notice], ERROR_TO_STRING[ERR_BAD_CREDENTIALS])
 	end
 
 	#######################################################################
@@ -234,6 +285,12 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{ERR_BAD_CREDENTIALS}}", response.body)
+
+		# Print the flash for visual validation
+		puts flash[:notice]
+
+		# Assert the flash was populated with the right message
+		assert_equal(flash[:notice], ERROR_TO_STRING[ERR_BAD_CREDENTIALS])
 	end
 
 	#######################################################################
@@ -257,5 +314,8 @@ class UsersControllerTest < ActionController::TestCase
 
 		# Assert the response has the right JSON
 		assert_equal("{\"errCode\":#{SUCCESS},\"count\":2}", response.body)
+
+		# Assert that the instance variable exists for the view to use
+		assert_not_nil(assigns["user"])
 	end
 end
