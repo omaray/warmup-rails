@@ -1,7 +1,9 @@
-<p1>Welcome <%= @user.username %></p1><br>
-<p1>You have been logged in <%= @user.count %> times</p1>
-<div>
-	<form name="input" action="/users/logout" method="post">
-		<input type="submit" name="logout" value="Logout" />
-	</form>
+<div class="center hero-unit">
+	<p1>Welcome <%= @user.username %></p1><br>
+	<p1>You have been logged in <%= @user.count %> times</p1>
+	<div>
+		<form name="input" action="/users/logout" method="post">
+			<input type="submit" name="logout" value="Logout" />
+		</form>
+	</div>
 </div>
