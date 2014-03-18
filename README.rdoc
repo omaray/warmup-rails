@@ -1,28 +1,16 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The warmup project shows how to expose some REST APIs to be called from a client as well as a basic HTML UI client.
 
-Things you may want to cover:
+Things to note about the project in terms of tests:
+- It contains Models tests
+- It contains Controllers tests
+- It contains Routing tests
+- It doesn't contain any View tests (but should be added in real projects)
+- It doesn't contain any Integration tests (but should be added in real projects)
 
-* Ruby version
+For the Controllers test specifically: 
+- I could have added asserts that verify the response (e.g. SUCCESS or 200 OK)
+- I could have added asserts that verify the template used
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Otherwise, the business logic is mainly kept in the Controllers. This is in fact not necessarily the best approach. A lot of the business logic should have been pushed to the Models instead. Indeed, the "add" and "login" methods could have been pushed at a lower level. The Model offers validation and callbacks to handle these things.
